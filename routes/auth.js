@@ -16,7 +16,7 @@ router.post("/register", async (req, res) => {
   }
 });
 
-// Login
+// Login - UPDATED VERSION
 router.post("/login", async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -26,8 +26,23 @@ router.post("/login", async (req, res) => {
     const isMatch = await user.comparePassword(password);
     if (!isMatch) return res.status(400).json({ message: "Invalid password" });
 
-    const token = jwt.sign({ id: user._id, username: user.username }, process.env.JWT_SECRET, { expiresIn: "1d" });
-    res.json({ token });
+    const token = jwt.sign(
+      { id: user._id, username: user.username }, 
+      process.env.JWT_SECRET, 
+      { expiresIn: "1d" }
+    );
+    
+    // ✅ RETURN BOTH TOKEN AND USER DATA
+    res.json({
+      token: token,
+      user: {
+        id: user._id,
+        username: user.username,
+        // Add email if your User model has it
+        email: user.email || null
+      }
+    });
+    
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
