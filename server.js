@@ -1,4 +1,11 @@
 require("dotenv").config();
+
+// Debug logging for environment variables
+console.log('Environment Variables:');
+console.log('JWT_SECRET:', process.env.JWT_SECRET || 'NOT SET');
+console.log('MONGO_URI:', process.env.MONGO_URI ? 'SET' : 'NOT SET');
+console.log('PORT:', process.env.PORT || '3000 (default)');
+
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
