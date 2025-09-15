@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "create-indexes": "node scripts/createIndexes.js",
-    "dev": "nodemon server.js"
+    "seed": "node seed-data.js",
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js"
   },
   "keywords": [],
   "author": "",
