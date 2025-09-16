@@ -13,12 +13,13 @@ router.post("/", authMiddleware, async (req, res) => {
   try {
     const { school_id, trustee_id, student_info, order_amount, gateway_name } = req.body;
 
-    // 1️⃣ Create Order in DB
+    // 1️⃣ Create Order in DB (FIXED: added order_amount)
     const order = await Order.create({
       school_id,
       trustee_id,
       student_info,
-      gateway_name
+      gateway_name,
+      order_amount    // ← THIS WAS MISSING!
     });
 
     // 2️⃣ Generate JWT payload (for payment API)
